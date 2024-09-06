@@ -1,4 +1,5 @@
 class Animal {
+
     #name;
     #species;
 
@@ -20,7 +21,9 @@ class Animal {
     set name(newName) {
         this.#name = newName;
     }
-
+    getInfo() {
+        return `Name: ${this.#name}, Species: ${this.#species}`;
+    }
 }
 
 class Mammal extends Animal {
@@ -32,7 +35,15 @@ class Mammal extends Animal {
     get furColor() {
         return this.#furColor;
     }
+
+    set furColor(newColor){
+        this.#furColor = newColor;
+    }
+    getInfo() {
+        return `${super.getInfo()}, Fur Color: ${this.#furColor}`;
+    }
 }
+
 
 class Bird extends Animal {
     #wingSpan;
@@ -42,6 +53,12 @@ class Bird extends Animal {
     }
     get wingSpan() {
         return this.#wingSpan;
+    }
+    set wingSpan(newSpan) {
+        this.#wingSpan = newSpan;
+    }
+    getInfo() {
+        return `${super.getInfo()}, Wing Span: ${this.#wingSpan}m`;
     }
 }
 
@@ -54,23 +71,63 @@ class Reptile extends Animal {
     get scaleType() {
         return this.#scaleType;
     }
+
+    set scaleType(newScale) {
+        return this.#scaleType;
+    }
+    getInfo() {
+        return `${super.getInfo()}, Scale Type: ${this.#scaleType}`;
+    }
 }
 
-class Zoo extends Animal {
+class Zoo {
+    constructor() {
+    this.cages = [];
+}
 
-    constructor(animal, species) {
-        super(animal, species);
-
-    }
+showAnimals() {
+    return this.cages.map(animal => animal.getInfo()).join('\n');
+}
 
     addAnimal(newAnimal) {
 
+        this.cages.push(newAnimal);
 
+    }
+
+    removeAnimal(animalToRemove) {
+        this.cages = this.cages.filter(animal => animal !== animalToRemove);
+    }
+
+    listAnimals() {
+        return this.cages.map(newCage => {
+            return newCage.getInfo();
+            
+        })
+        
+    }
+
+    getSpecies(newSpecies) {
+        return this.cages
+        .filter(animal => animal.species === newSpecies)
+        .map(animal => animal.getInfo());
     }
 }
 
-const anim1 = new Animal('Cat', 'feline');
-const anim2 = new Reptile('Comodo', 'Rep', 'Big')
+const theZoo = new Zoo();
+const newAn = new Animal('Fester', 'Goldfish')
+const chipMunk = new Mammal('Dale','Chipmunk','Brown');
+const hooHoo = new Bird('Kevin','Owl', 2);
+const tMnT = new Reptile('Leo','Turtle','Strong');
 
-console.log(anim1.name);
-console.log(anim2.scaleType);
+
+theZoo.addAnimal(newAn);
+theZoo.addAnimal(chipMunk);
+theZoo.addAnimal(hooHoo);
+theZoo.addAnimal(tMnT);
+
+console.log(theZoo.getSpecies('Turtle'));
+
+
+
+
