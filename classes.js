@@ -112,6 +112,10 @@ showAnimals() {
         .filter(animal => animal.species === newSpecies)
         .map(animal => animal.getInfo());
     }
+
+    countAnimals() {
+        return this.cages.length;
+    }
 }
 
 const theZoo = new Zoo();
@@ -126,7 +130,7 @@ theZoo.addAnimal(chipMunk);
 theZoo.addAnimal(hooHoo);
 theZoo.addAnimal(tMnT);
 
-console.log(theZoo.getSpecies('Turtle'));
+console.log(theZoo.countAnimals());
 
 
 
