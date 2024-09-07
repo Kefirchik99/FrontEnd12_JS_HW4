@@ -114,7 +114,7 @@ showAnimals() {
     }
 
     countAnimals() {
-        return this.cages.length;
+        return `The number of animals in the Zoo is: ${this.cages.length}`;
     }
 }
 
